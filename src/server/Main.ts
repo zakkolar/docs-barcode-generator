@@ -22,8 +22,8 @@ function onOpen(){
 global.onOpen = onOpen;
 
 
-function insertBarcode(url, text){
-   insertImage(url, text);
+function insertBarcode(url, text, scale){
+   insertImage(url, text, scale);
 }
 //@ts-ignore
 global.insertBarcode = insertBarcode;
@@ -36,7 +36,7 @@ function getBlobFromString(img) {
     return blob;
 }
 
-function insertImage(img, text) {
+function insertImage(img, text, scale) {
     var blob = getBlobFromString(img);
     var cursor = DocumentApp.getActiveDocument().getCursor();
     var image;
@@ -49,8 +49,8 @@ function insertImage(img, text) {
         image = DocumentApp.getActiveDocument().getBody().appendImage(blob);
     }
 
-    const newHeight = image.getHeight() * 0.8;
-    const newWidth = image.getWidth() * 0.8;
+    const newHeight = image.getHeight() * scale;
+    const newWidth = image.getWidth() * scale;
 
     image.setHeight(newHeight);
     image.setWidth(newWidth);
